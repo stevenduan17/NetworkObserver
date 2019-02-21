@@ -1,5 +1,5 @@
 # NetworkObserver
-NetworkObserver--极简可实时监控网络状态，兼容至Android 9.0
+#### NetworkObserver--极简可实时监控网络状态，兼容至Android 9.0。
 在APP中涉及到网络请求，很多时候都需要监控网络状态，NetworkObserver借鉴EventBus的思想，实现随处可监听网络状态变化。
 
 ### 使用

@@ -29,5 +29,5 @@ NetworkObserver.getDefault().register(context, this)
 NetworkObserver.getDefault().unregister(context, this)
 ```
 ### 说明
-1. 注册和节出注册必定是成对出现的，否则会出现异常，例如在Activity的onCreate()注册，在onDestroy()解除注册
+1. 注册和解除注册必定是成对出现的，否则会出现异常，例如在Activity的onCreate()注册，在onDestroy()解除注册
 2. 传入的参数为（context,observer），observer为所要监听的主体，可以为Activity、Fragment等。

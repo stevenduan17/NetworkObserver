@@ -56,6 +56,25 @@ class NetworkObserver private constructor() {
         }
     }
 
+    fun subscribe(context: Context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            context.registerReceiver(mReceiver, IntentFilter(ACTION_NETWORK_CHANGE))
+        } else {
+            getConnectivityManager(context).registerNetworkCallback(
+                NetworkRequest.Builder().build(),
+                mNetworkCallbackImpl
+            )
+        }
+    }
+
+    fun unsubscribe(context: Context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            context.unregisterReceiver(mReceiver)
+        } else {
+            getConnectivityManager(context).unregisterNetworkCallback(mNetworkCallbackImpl)
+        }
+    }
+
     fun unsubscribe(context: Context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             context.unregisterReceiver(mReceiver)

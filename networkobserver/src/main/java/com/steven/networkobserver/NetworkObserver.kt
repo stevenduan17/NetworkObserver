@@ -45,7 +45,7 @@ class NetworkObserver private constructor() {
         }
     }
 
-    fun register(context: Context, observer: Any) {
+    fun subscribe(context: Context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             context.registerReceiver(mReceiver, IntentFilter(ACTION_NETWORK_CHANGE))
         } else {
@@ -54,15 +54,21 @@ class NetworkObserver private constructor() {
                 mNetworkCallbackImpl
             )
         }
-        registerObserver(observer)
     }
 
-    fun unregister(context: Context, observer: Any) {
+    fun unsubscribe(context: Context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             context.unregisterReceiver(mReceiver)
         } else {
             getConnectivityManager(context).unregisterNetworkCallback(mNetworkCallbackImpl)
         }
+    }
+
+    fun register(observer: Any) {
+        registerObserver(observer)
+    }
+
+    fun unregister(observer: Any) {
         unregisterObserver(observer)
     }
 

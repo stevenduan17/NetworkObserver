@@ -13,11 +13,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        NetworkObserver.getDefault().register(this, this)
+        NetworkObserver.getDefault().apply {
+            subscribe(this@MainActivity)
+            register(this@MainActivity)
+        }
     }
 
     override fun onDestroy() {
-        NetworkObserver.getDefault().unregister(this, this)
+        NetworkObserver.getDefault().apply {
+            unsubscribe(this@MainActivity)
+            unregister(this@MainActivity)
+        }
         super.onDestroy()
     }
 

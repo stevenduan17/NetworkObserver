@@ -1,5 +1,5 @@
 ## NetworkObserver--A simple and convenient library to monitor network status in real time ，compatible with Android 10.0.
-![release](https://img.shields.io/badge/release-0.2.0-green.svg)  ![API](https://img.shields.io/badge/API-14+-green.svg)  ![Licenses](https://img.shields.io/badge/Licenses-Apache2.0-green.svg)
+[ ![Download](https://api.bintray.com/packages/stevenduan/maven/networkobserver/images/download.svg) ](https://bintray.com/stevenduan/maven/networkobserver/_latestVersion)  ![API](https://img.shields.io/badge/API-14+-green.svg)  ![Licenses](https://img.shields.io/badge/Licenses-Apache2.0-green.svg)
 
 In many cases, network status needs to be monitored in our application,we want to know current network status: WLAN,mobile network or event 2G,3G,4G,5G. NetworkObserver uses the idea of EventBus to observe network status changes everywhere.
 

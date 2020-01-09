@@ -13,7 +13,7 @@ dependencies {
 ```
 
 ### AndroidX
-If your application build with androidX,please use version 0.2.0 and above.Use support library can continue to use 0.1.x version. If the target version is lower than 29 (Android Q), the 5G is a new field added to Android Q to determine the mobile network status and the related methods may fail, but the basic network type judgment is not affected.
+If your application build with androidX,please use version 0.2.0 and above.Use support library can continue to use 0.1.1 version. If the target version is lower than 29 (Android Q), the 5G is a new field added to Android Q to determine the mobile network status and the related methods may fail, but the basic network type judgment is not affected.
 
 ### Usage
 1. subscribe & register

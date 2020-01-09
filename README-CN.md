@@ -11,7 +11,7 @@ dependencies {
 ```
 
 ### AndroidX
-使用androidX请使用0.2.0及以上版本，使用support库可以继续使用0.1.x版本。如果使用target version 低于29（Android Q）,由于判断手机网路状态5G为Android Q新加字段，相关方法可能失效，基本的网络类型判断不受影响。
+使用androidX请使用0.2.0及以上版本，使用support库可以继续使用0.1.1版本。如果使用target version 低于29（Android Q）,由于判断手机网路状态5G为Android Q新加字段，相关方法可能失效，基本的网络类型判断不受影响。
 
 ### 使用
 1. 注册与监听

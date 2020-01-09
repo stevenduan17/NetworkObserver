@@ -1,5 +1,5 @@
 ## NetworkObserver--极简可实时监控网络状态，兼容至Android 10.0。
-![](https://img.shields.io/badge/release-0.1.0-green.svg)  ![](https://img.shields.io/badge/API-14+-green.svg)  ![](https://img.shields.io/badge/Licenses-Apache-2.0-green.svg)
+![release](https://img.shields.io/badge/release-0.1.0-green.svg)  ![API](https://img.shields.io/badge/API-14+-green.svg)  ![Licenses](https://img.shields.io/badge/Licenses-Apache2.0-green.svg)
 
 在APP中涉及到网络请求，很多时候都需要监控网络状态，NetworkObserver借鉴EventBus的思想，实现随处可监听网络状态变化。
 

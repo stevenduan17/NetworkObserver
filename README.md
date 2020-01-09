@@ -16,14 +16,20 @@ dependencies {
 If your application build with androidX,please use version 0.2.0 and above.Use support library can continue to use 0.1.x version. If the target version is lower than 29 (Android Q), the 5G is a new field added to Android Q to determine the mobile network status and the related methods may fail, but the basic network type judgment is not affected.
 
 ### Usage
-1. subscribe & register
+1. add permissions to manifest
+```
+ <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+ <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+```
+
+2. subscribe & register
 ```
 NetworkObserver.getDefault().apply {
     subscribe(this@MainActivity)
     register(this@MainActivity)
 }
 ```
-2. observe on Activity or Fragment
+3. observe on Activity or Fragment
 ```
  @OnNetworkChange
  fun onNetworkChange(type: NetworkType) {
@@ -40,14 +46,14 @@ NetworkObserver.getDefault().apply {
      }
  }
 ```
-3. unsubscribe & unregister
+4. unsubscribe & unregister
 ```
  NetworkObserver.getDefault().apply {
     unsubscribe(this@MainActivity)
     unregister(this@MainActivity)
  }
 ```
-4. Get subtypes of mobile network
+5. get subtypes of mobile network
 Global util method #getMobileNetworkSubType(context) can judge 2G, 3G, 4G, but 5G requires AndroidX, and target version is 29 (Android Q).
 
 ### Notes

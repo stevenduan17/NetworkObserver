@@ -14,14 +14,19 @@ dependencies {
 使用androidX请使用0.2.0及以上版本，使用support库可以继续使用0.1.x版本。如果使用target version 低于29（Android Q）,由于判断手机网路状态5G为Android Q新加字段，相关方法可能失效，基本的网络类型判断不受影响。
 
 ### 使用
-1. 注册与监听
+1. 添加权限
+```
+ <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+ <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+```
+2. 注册与监听
 ```
 NetworkObserver.getDefault().apply {
     subscribe(this@MainActivity)
     register(this@MainActivity)
 }
 ```
-2. Activity或Fragment中使用
+3. Activity或Fragment中使用
 ```
  @OnNetworkChange
  fun onNetworkChange(type: NetworkType) {
@@ -38,14 +43,14 @@ NetworkObserver.getDefault().apply {
      }
  }
 ```
-3. 解除注册与监听
+4. 解除注册与监听
 ```
  NetworkObserver.getDefault().apply {
     unsubscribe(this@MainActivity)
     unregister(this@MainActivity)
  }
 ```
-4. 手机网络子类型判断
+5. 手机网络子类型判断
 工具类全局方法getMobileNetworkSubType(context)可判断2G、3G、4G, 判断5G需要使用AndroidX,target version为29（Android Q）.
 
 ### 说明

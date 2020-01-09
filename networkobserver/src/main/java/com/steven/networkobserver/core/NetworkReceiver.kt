@@ -1,19 +1,23 @@
 package com.steven.networkobserver.core
 
+import android.annotation.TargetApi
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.os.Build
 import com.steven.networkobserver.bean.NetworkType
-import com.steven.networkobserver.constant.ACTION_NETWORK_CHANGE
-import com.steven.networkobserver.util.getNetworkType
+import com.steven.networkobserver.getNetworkType
 
 /**
- * BroadcastReceiver must have a public zero argument constructor
+ * Connectivity for api 20 or lower.
  *
- * @author Steven Duan
+ * @author Steven
  * @since 2019/2/20
  * @version 1.0
  */
+@Suppress("DEPRECATION")
+@TargetApi(Build.VERSION_CODES.KITKAT)
 class NetworkReceiver() : BroadcastReceiver() {
 
     private var onNetworkChange: (type: NetworkType) -> Unit = {}
@@ -24,11 +28,11 @@ class NetworkReceiver() : BroadcastReceiver() {
     }
 
     override fun onReceive(context: Context, intent: Intent?) {
-        if (intent?.action == ACTION_NETWORK_CHANGE) {
+        if (intent?.action == ConnectivityManager.CONNECTIVITY_ACTION) {
             val networkType = getNetworkType(context)
             if (cache != networkType) {
-                onNetworkChange(networkType)
                 cache = networkType
+                onNetworkChange(networkType)
             }
         }
     }

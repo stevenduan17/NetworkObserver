@@ -1,7 +1,7 @@
 package com.steven.networkobserver
 
 /**
- * @author Steven Duan
+ * @author Steven
  * @since 2019/2/19
  * @version 1.0
  */

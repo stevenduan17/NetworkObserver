@@ -8,8 +8,9 @@ import android.support.annotation.RequiresApi
 import com.steven.networkobserver.bean.NetworkType
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-class NetworkCallbackImpl private constructor(private val onNetworkChange: (type: NetworkType) -> Unit) :
-    ConnectivityManager.NetworkCallback() {
+class NetworkCallbackImpl private constructor(
+    private val onNetworkChange: (type: NetworkType) -> Unit
+) : ConnectivityManager.NetworkCallback() {
 
     companion object {
         @Volatile
@@ -23,8 +24,8 @@ class NetworkCallbackImpl private constructor(private val onNetworkChange: (type
     }
 
     /**
-     * Because of [onCapabilitiesChanged] will be invoked several times even on same network type, add a cache to
-     * avoid method by @OnNetworkChange annotation invoked on the same time.
+     * Because of [onCapabilitiesChanged] will be invoked several times even on same network type,
+     * add a cache to avoid method by @OnNetworkChange annotation invoked on the same time.
      */
     private var cache: NetworkType? = null
 
@@ -39,7 +40,10 @@ class NetworkCallbackImpl private constructor(private val onNetworkChange: (type
     /**
      * Note： Build code M or lower will not trigger this callback when testing on many phones.
      */
-    override fun onCapabilitiesChanged(network: Network?, networkCapabilities: NetworkCapabilities?) {
+    override fun onCapabilitiesChanged(
+        network: Network?,
+        networkCapabilities: NetworkCapabilities?
+    ) {
         super.onCapabilitiesChanged(network, networkCapabilities)
         if (networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) == true) {
             if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {

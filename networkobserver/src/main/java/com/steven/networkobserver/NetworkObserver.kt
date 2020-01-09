@@ -1,5 +1,6 @@
 package com.steven.networkobserver
 
+import android.app.Activity
 import android.content.Context
 import android.content.IntentFilter
 import android.net.ConnectivityManager
@@ -7,16 +8,18 @@ import android.net.NetworkRequest
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.support.annotation.RequiresPermission
+import android.support.v4.app.Fragment
 import com.steven.networkobserver.bean.NetworkMethod
 import com.steven.networkobserver.bean.NetworkType
-import com.steven.networkobserver.constant.ACTION_NETWORK_CHANGE
 import com.steven.networkobserver.core.NetworkCallbackImpl
 import com.steven.networkobserver.core.NetworkReceiver
+import java.lang.IllegalArgumentException
 
 /**
- * @author Steven Duan
- * @since 2019/2/20
- * @version 1.0
+ * @author Steven
+ * @since 2020/1/8
+ * @version 0.1.0
  */
 class NetworkObserver private constructor() {
 
@@ -45,9 +48,14 @@ class NetworkObserver private constructor() {
         }
     }
 
+    @Suppress("DEPRECATION")
+    @RequiresPermission(android.Manifest.permission.ACCESS_NETWORK_STATE)
     fun subscribe(context: Context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-            context.registerReceiver(mReceiver, IntentFilter(ACTION_NETWORK_CHANGE))
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            context.registerReceiver(
+                mReceiver,
+                IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+            )
         } else {
             getConnectivityManager(context).registerNetworkCallback(
                 NetworkRequest.Builder().build(),
@@ -65,29 +73,29 @@ class NetworkObserver private constructor() {
     }
 
     fun register(observer: Any) {
-        registerObserver(observer)
+        checkObserver(observer)
+        var methods = mMap[observer]
+        if (methods == null) {
+            methods = findAnnotationMethods(observer)
+            mMap[observer] = methods
+        }
     }
 
     fun unregister(observer: Any) {
-        unregisterObserver(observer)
+        checkObserver(observer)
+        if (mMap.isNotEmpty()) {
+            mMap.remove(observer)
+        }
+    }
+
+    private fun checkObserver(observer: Any) {
+        if (observer !is Activity && observer !is Fragment) {
+            throw  IllegalArgumentException("Observer must be one of Activity or Fragment.")
+        }
     }
 
     private fun getConnectivityManager(context: Context): ConnectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-    private fun registerObserver(obj: Any) {
-        var methods = mMap[obj]
-        if (methods == null) {
-            methods = findAnnotationMethods(obj)
-            mMap[obj] = methods
-        }
-    }
-
-    private fun unregisterObserver(obj: Any) {
-        if (mMap.isNotEmpty()) {
-            mMap.remove(obj)
-        }
-    }
 
     private fun findAnnotationMethods(obj: Any): MutableList<NetworkMethod> {
         val clazz = obj.javaClass

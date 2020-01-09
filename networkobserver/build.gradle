@@ -39,7 +39,7 @@ publish {
     userOrg = 'stevenduan'
     groupId = 'com.steven'
     artifactId = 'networkobserver'
-    publishVersion = '0.1.0'
+    publishVersion = '0.1.1'
     desc = 'A simple and convenient real-time network oberver compat to Android Q.'
     website = 'https://github.com/stevenduan17/NetworkObserver'
 }

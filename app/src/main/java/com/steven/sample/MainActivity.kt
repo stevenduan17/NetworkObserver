@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         NetworkObserver.getDefault().apply {
-            unsubscribe(this@MainActivity)
             unregister(this@MainActivity)
+            unsubscribe(this@MainActivity)
         }
         super.onDestroy()
     }

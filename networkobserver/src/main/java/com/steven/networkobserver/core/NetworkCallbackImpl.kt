@@ -29,7 +29,7 @@ class NetworkCallbackImpl private constructor(
      */
     private var cache: NetworkType? = null
 
-    override fun onLost(network: Network?) {
+    override fun onLost(network: Network) {
         super.onLost(network)
         if (cache != NetworkType.NONE) {
             cache = NetworkType.NONE
@@ -41,11 +41,11 @@ class NetworkCallbackImpl private constructor(
      * Note： Build code M or lower will not trigger this callback when testing on many phones.
      */
     override fun onCapabilitiesChanged(
-        network: Network?,
-        networkCapabilities: NetworkCapabilities?
+        network: Network,
+        networkCapabilities: NetworkCapabilities
     ) {
         super.onCapabilitiesChanged(network, networkCapabilities)
-        if (networkCapabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) == true) {
+        if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)) {
             if (networkCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
                 if (cache != NetworkType.WIFI) {
                     cache = NetworkType.WIFI

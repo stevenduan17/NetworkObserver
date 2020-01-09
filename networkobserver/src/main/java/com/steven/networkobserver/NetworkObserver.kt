@@ -65,7 +65,7 @@ class NetworkObserver private constructor() {
     }
 
     fun unsubscribe(context: Context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             context.unregisterReceiver(mReceiver)
         } else {
             getConnectivityManager(context).unregisterNetworkCallback(mNetworkCallbackImpl)

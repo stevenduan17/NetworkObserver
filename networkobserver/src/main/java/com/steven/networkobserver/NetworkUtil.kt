@@ -5,7 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresPermission
 import android.telephony.TelephonyManager
 import com.steven.networkobserver.bean.MobileNetworkSubType
 import com.steven.networkobserver.bean.NetworkType
@@ -19,6 +19,7 @@ import com.steven.networkobserver.bean.NetworkType
 /**
  * Check network is available.
  */
+@Suppress("DEPRECATION")
 @RequiresPermission(android.Manifest.permission.ACCESS_NETWORK_STATE)
 fun isNetworkConnected(context: Context): Boolean {
     val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -53,18 +54,9 @@ fun getNetworkType(context: Context): NetworkType {
     }
 }
 
-@TargetApi(Build.VERSION_CODES.P)
+@TargetApi(Build.VERSION_CODES.Q)
 fun getMobileNetworkSubType(context: Context): MobileNetworkSubType? {
-    return getSubTypeForP(getTelephonyManager(context))
-}
-
-private fun getTelephonyManager(context: Context) =
-    context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-
-/**
- * API above has TelephonyManager.NETWORK_TYPE_NR for 5G.
- */
-private fun getSubTypeForP(manager: TelephonyManager): MobileNetworkSubType? {
+    val manager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
     return when (manager.networkType) {
         TelephonyManager.NETWORK_TYPE_GPRS,
         TelephonyManager.NETWORK_TYPE_EDGE,
@@ -81,6 +73,7 @@ private fun getSubTypeForP(manager: TelephonyManager): MobileNetworkSubType? {
         TelephonyManager.NETWORK_TYPE_EHRPD,
         TelephonyManager.NETWORK_TYPE_HSPAP -> MobileNetworkSubType.MOBILE_3_G
         TelephonyManager.NETWORK_TYPE_LTE -> MobileNetworkSubType.MOBILE_4_G
+        TelephonyManager.NETWORK_TYPE_NR -> MobileNetworkSubType.MOBILE_5_G
         else -> null
     }
 }

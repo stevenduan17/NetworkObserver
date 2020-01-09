@@ -8,8 +8,8 @@ import android.net.NetworkRequest
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.support.annotation.RequiresPermission
-import android.support.v4.app.Fragment
+import androidx.annotation.RequiresPermission
+import androidx.fragment.app.Fragment
 import com.steven.networkobserver.bean.NetworkMethod
 import com.steven.networkobserver.bean.NetworkType
 import com.steven.networkobserver.core.NetworkCallbackImpl

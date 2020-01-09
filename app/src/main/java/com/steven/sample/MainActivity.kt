@@ -2,7 +2,7 @@ package com.steven.sample
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.steven.networkobserver.NetworkObserver
 import com.steven.networkobserver.OnNetworkChange
 import com.steven.networkobserver.bean.NetworkType
